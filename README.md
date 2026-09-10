@@ -1,11 +1,9 @@
-# Sponsor My Duo
+# Sponsor my iPhone Duo
 
 Sell sticker spots on the back of the new iPhone Duo ($1,999, pre-orders
 Oct 16, ships Oct 23). Companies bid for space — the bigger the spot, the
 higher the price. If every spot sells at its starting bid, the phone pays
 for itself.
-
-Inspired by [Marc Lou's Sponsor My Body](https://hyrox.marclou.com).
 
 The whole site is one file: **`index.html`**. No build step, no dependencies.
 
