@@ -39,6 +39,15 @@ Bids are submitted in-page (no redirect) to the email in `CONFIG.email`
 If the delivery service is unreachable when someone bids, their email app
 opens with the bid pre-filled and addressed to you — no bid is lost.
 
+## Analytics
+
+Cookieless analytics via [GoatCounter](https://goatcounter.com) (free,
+no cookie banner needed): create an account, pick a site code, and put
+it in `CONFIG.goatcounter` (e.g. `"sponsormyduo"` for a
+`sponsormyduo.goatcounter.com` dashboard). Page views and a `bid:<spot>`
+event per submitted bid are tracked. Leave the field empty to disable
+analytics entirely.
+
 ## Managing the auction
 
 Everything lives in the `CONFIG` object at the bottom of `index.html`:
