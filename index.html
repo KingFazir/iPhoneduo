@@ -666,7 +666,7 @@
         <label for="fNote">Note <span style="font-weight:400;color:var(--steel)">(optional)</span></label>
         <textarea id="fNote" name="note" rows="2" placeholder="Link to your logo, sticker ideas, merge requests…"></textarea>
       </div>
-      <button class="btn accent" type="submit" style="width:100%">Place bid</button>
+      <button class="btn accent" type="submit" id="bidSubmit" style="width:100%">Place bid</button>
       <p class="form-note">No charge now — you're invoiced only if your bid wins when bidding closes on Oct 16.</p>
     </form>
   </div>
@@ -677,9 +677,16 @@
    CONFIG — everything you'll ever need to edit lives here.
    ============================================================ */
 const CONFIG = {
-  // Where bid emails go. Powered by formsubmit.co — the FIRST submission
-  // sends you an activation email; click it once and you're live.
+  // Where bid emails go.
   email: "fazirjameerali@gmail.com",
+
+  // RECOMMENDED: a Web3Forms access key (free, ~30s: enter your email at
+  // https://web3forms.com and the key arrives by mail). When set, bids are
+  // delivered through Web3Forms. When empty, formsubmit.co is used instead
+  // (requires clicking their one-time activation email after the first bid).
+  // Either way, if the service is unreachable the bidder's email app opens
+  // with the bid pre-filled, so no bid is ever lost.
+  web3formsKey: "",
 
   goal: 1999,                              // iPhone duo, 256 GB
   closes: "2026-10-16T12:00:00Z",          // pre-orders open: Oct 16, 5:00 AM PT
@@ -802,6 +809,48 @@ const modal = $("#bidModal"), form = $("#bidForm");
 form.action = "https://formsubmit.co/" + CONFIG.email;
 $("#fNext").value = location.origin + location.pathname + "?sent=1";
 $("#mailLink").href = "mailto:" + CONFIG.email;
+
+/* submit in-page; fall back to a prefilled email if the service is down */
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = $("#bidSubmit");
+  btn.disabled = true; btn.textContent = "Sending…";
+  const data = Object.fromEntries(new FormData(form).entries());
+  try {
+    let res;
+    if (CONFIG.web3formsKey){
+      res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Accept": "application/json"},
+        body: JSON.stringify({
+          access_key: CONFIG.web3formsKey,
+          subject: data._subject,
+          from_name: data.company,
+          spot: data.spot, company: data.company, bid_usd: data.bid_usd,
+          website: data.website, email: data.email, note: data.note || "",
+        }),
+      });
+    } else {
+      res = await fetch("https://formsubmit.co/ajax/" + CONFIG.email, {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Accept": "application/json"},
+        body: JSON.stringify(data),
+      });
+    }
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    modal.close();
+    form.reset();
+    toast("Bid sent! I'll email you if you're outbid — or when you win.");
+  } catch (err) {
+    const body = encodeURIComponent(
+      `Spot: ${data.spot}\nCompany: ${data.company}\nBid (USD): ${data.bid_usd}\nWebsite: ${data.website}\nContact: ${data.email}\nNote: ${data.note || "-"}`);
+    modal.close();
+    toast("Bid service unreachable — opening your email app with the bid pre-filled. Just hit send.");
+    location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(data._subject)}&body=${body}`;
+  } finally {
+    btn.disabled = false; btn.textContent = "Place bid";
+  }
+});
 function openBid(id){
   const s = CONFIG.spots.find(x => x.id === id);
   $("#mTitle").textContent = s.sponsor ? `Outbid ${s.sponsor.name}` : `Bid on spot ${s.id}`;
