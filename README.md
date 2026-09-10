@@ -27,7 +27,6 @@ Everything lives in the `CONFIG` object at the bottom of `index.html`:
   progress bar automatically.
 - **Mark a spot won/paid** — set `sponsor: {name: "Acme", url: "https://acme.com"}`.
   The sponsor's name renders on the phone.
-- **Your handle** — replace `@yourhandle` in the footer.
 - **Change dates, goal, or minimum outbid %** — `closes`, `goal`, `minIncrease`.
 - **Move/resize spots** — each spot has `x/y/w/h` as percentages of the
   72 × 152 mm panel; the mm labels recompute automatically.
