@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sponsor My Duo</title>
-<meta name="description" content="Bid for a sticker spot on the back of the new iPhone duo. Bigger spot, bigger price. Help pay for the phone — your brand rides along everywhere it goes.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='18' y='4' width='64' height='92' rx='14' fill='%231B1E24'/><rect x='26' y='34' width='48' height='20' rx='4' fill='none' stroke='%23F56300' stroke-width='5' stroke-dasharray='8 6'/></svg>">
+<meta name="description" content="Bid for a sticker spot on the back of the new iPhone duo. Drag a sample sticker onto the phone, pick your spot, place your bid — bigger space, bigger price.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='18' y='4' width='64' height='92' rx='14' fill='%23151827'/><rect x='26' y='34' width='48' height='20' rx='4' fill='none' stroke='%23F56300' stroke-width='5' stroke-dasharray='8 6'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -18,8 +18,6 @@
     --line:#D9DCE0;
     --accent:#F56300;
     --accent-ink:#C24E00;
-    --phone-a:#1B1E24;
-    --phone-b:#2B303A;
     --ok:#2E7D4F;
     --display:"Archivo","Helvetica Neue",Arial,sans-serif;
     --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
@@ -46,10 +44,7 @@
   .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
   /* ---------- top bar ---------- */
-  header.top{
-    display:flex;align-items:center;justify-content:space-between;gap:16px;
-    padding-block:18px;
-  }
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:18px}
   .wordmark{
     font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.02em;
     text-decoration:none;display:flex;align-items:center;gap:10px;
@@ -70,6 +65,16 @@
   .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
   .btn.ghost:hover{background:#fff;transform:translateY(-1px)}
 
+  /* ---------- entrance ---------- */
+  @keyframes rise{from{opacity:.35;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .hero > *{animation:rise .55s ease both}
+  .hero > *:nth-child(2){animation-delay:.06s}
+  .hero > *:nth-child(3){animation-delay:.12s}
+  .hero > *:nth-child(4){animation-delay:.18s}
+  .hero > *:nth-child(5){animation-delay:.24s}
+  .reveal{transform:translateY(20px);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{transform:none}
+
   /* ---------- hero ---------- */
   .hero{padding-block:clamp(40px,7vw,84px) clamp(36px,5vw,64px)}
   .eyebrow{
@@ -83,17 +88,11 @@
     font-size:clamp(38px,6.4vw,74px);max-width:18ch;text-wrap:balance;
   }
   h1 .hl{color:var(--accent)}
-  .hero p.lede{
-    margin-top:22px;max-width:56ch;font-size:clamp(16px,1.6vw,19px);color:#3A4048;
-  }
+  .hero p.lede{margin-top:22px;max-width:56ch;font-size:clamp(16px,1.6vw,19px);color:#3A4048}
   .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 
-  .hero-stats{
-    margin-top:44px;display:grid;grid-template-columns:1.4fr 1fr;gap:16px;
-  }
-  .stat-card{
-    background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;
-  }
+  .hero-stats{margin-top:44px;display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+  .stat-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
   .stat-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--steel)}
   .fund-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:10px}
   .fund-now{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.02em}
@@ -106,70 +105,219 @@
   .count-cell .u{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
   .count-foot{margin-top:10px;font-size:13.5px;color:var(--steel)}
 
-  /* ---------- board: phone + inventory ---------- */
+  /* ---------- board ---------- */
   .board{padding-block:clamp(30px,4vw,56px)}
-  .section-head{margin-bottom:clamp(22px,3vw,36px);max-width:60ch}
+  .section-head{margin-bottom:clamp(22px,3vw,36px);max-width:62ch}
   h2{
     font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.06;
     font-size:clamp(27px,3.6vw,42px);text-wrap:balance;
   }
   .section-head p{margin-top:12px;color:#3A4048;font-size:16.5px}
   .board-grid{display:grid;grid-template-columns:minmax(300px,430px) 1fr;gap:clamp(24px,4vw,56px);align-items:start}
-  .phone-col{position:sticky;top:24px}
+  .phone-col{position:sticky;top:16px}
 
-  /* the phone */
-  .phone-stage{padding:10px 6px 2px}
+  /* ===== the phone ===== */
+  .phone-stage{padding:6px 6px 0;perspective:1200px;touch-action:pan-y}
+  .phone-wrap{position:relative;margin-right:26px;margin-bottom:30px}
   .phone{
-    position:relative;width:100%;aspect-ratio:72/152;
-    border-radius:12.5% / 5.9%;
-    background:linear-gradient(155deg,var(--phone-b) 0%,var(--phone-a) 55%,#14171C 100%);
+    position:relative;width:100%;aspect-ratio:65/132;
+    border-radius:13% / 6.4%;
+    background:
+      radial-gradient(120% 90% at 78% 8%,rgba(96,116,190,.20),transparent 46%),
+      radial-gradient(80% 60% at 18% 95%,rgba(70,80,140,.14),transparent 55%),
+      linear-gradient(158deg,#232838 0%,#171B29 42%,#0F1220 74%,#1B2032 100%);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.14),
-      inset 0 -2px 6px rgba(0,0,0,.5),
-      0 24px 60px -18px rgba(17,20,24,.45);
+      inset 0 1.5px 1px rgba(190,205,255,.28),
+      inset 0 -2px 2px rgba(0,0,0,.6),
+      inset 2px 0 3px rgba(150,165,220,.10),
+      inset -2px 0 3px rgba(0,0,0,.45),
+      0 30px 70px -20px rgba(15,18,32,.55),
+      0 8px 24px -12px rgba(15,18,32,.4);
+    transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+    transition:transform .18s ease-out;
+    transform-style:preserve-3d;
+    animation:rise .7s ease;
   }
-  .phone::before{ /* hinge highlight on the fold edge */
-    content:"";position:absolute;inset:1.2% auto 1.2% 2.4%;width:1.5px;
-    background:linear-gradient(180deg,transparent,rgba(255,255,255,.16) 20%,rgba(255,255,255,.16) 80%,transparent);
+  .phone-stage.dragging .phone{transform:none;transition:transform .25s ease}
+  /* night-sky micro sparkle */
+  .phone .sparkle{
+    position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.5;
+    background-image:
+      radial-gradient(1px 1px at 12% 22%,rgba(255,255,255,.5),transparent 100%),
+      radial-gradient(1px 1px at 64% 12%,rgba(200,215,255,.4),transparent 100%),
+      radial-gradient(1.5px 1.5px at 82% 58%,rgba(255,255,255,.32),transparent 100%),
+      radial-gradient(1px 1px at 32% 72%,rgba(200,215,255,.38),transparent 100%),
+      radial-gradient(1px 1px at 51% 43%,rgba(255,255,255,.3),transparent 100%),
+      radial-gradient(1.5px 1.5px at 22% 91%,rgba(200,215,255,.3),transparent 100%),
+      radial-gradient(1px 1px at 88% 84%,rgba(255,255,255,.35),transparent 100%),
+      radial-gradient(1px 1px at 44% 8%,rgba(255,255,255,.3),transparent 100%);
+  }
+  .phone .sheen{
+    position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6;
+    background:radial-gradient(320px 420px at var(--sx,75%) var(--sy,12%),rgba(210,220,255,.10),transparent 65%);
+  }
+  .phone .hinge{
+    position:absolute;top:1.4%;bottom:1.4%;left:2.6%;width:2px;pointer-events:none;
+    background:linear-gradient(180deg,transparent,rgba(190,205,255,.22) 16%,rgba(190,205,255,.22) 84%,transparent);
   }
   .cam{
-    position:absolute;left:6%;top:3%;width:40%;height:16%;
-    border-radius:22%/26%;
-    background:linear-gradient(150deg,#30353F,#1A1D23);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -3px 8px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.35);
+    position:absolute;left:6%;top:3%;width:40%;height:16%;z-index:5;
+    border-radius:24%/28%;
+    background:
+      radial-gradient(120% 120% at 30% 20%,rgba(120,140,200,.16),transparent 50%),
+      linear-gradient(150deg,#2B3145,#161A28 70%);
+    box-shadow:
+      inset 0 1.5px 1px rgba(190,205,255,.22),
+      inset 0 -3px 8px rgba(0,0,0,.6),
+      0 3px 8px rgba(0,0,0,.45);
     display:grid;place-items:center;
   }
-  .cam .lenses{display:grid;grid-template-rows:1fr 1fr;gap:14%;height:72%;aspect-ratio:1/2.1}
+  .cam .lenses{display:grid;grid-template-rows:1fr 1fr;gap:12%;height:74%;aspect-ratio:1/2.12}
   .cam .lens{
-    width:100%;aspect-ratio:1;border-radius:50%;
-    background:radial-gradient(circle at 34% 30%,#3C4250 0%,#151820 55%,#05070A 100%);
-    box-shadow:inset 0 0 0 2px rgba(255,255,255,.07),inset 0 2px 5px rgba(0,0,0,.7);
+    position:relative;width:100%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#39415A 0%,#1A1E2E 45%,#04060C 72%);
+    box-shadow:
+      inset 0 0 0 2.5px rgba(200,212,255,.14),
+      inset 0 0 0 5px rgba(0,0,0,.55),
+      inset 0 3px 6px rgba(0,0,0,.7),
+      0 1px 2px rgba(0,0,0,.5);
+  }
+  .cam .lens::before{ /* inner glass */
+    content:"";position:absolute;inset:22%;border-radius:50%;
+    background:radial-gradient(circle at 38% 32%,#2E4460 0%,#101B2E 40%,#02050C 75%);
+    box-shadow:inset 0 0 0 1.5px rgba(120,160,255,.18),inset 0 0 6px rgba(80,40,160,.35);
+  }
+  .cam .lens::after{ /* specular dot */
+    content:"";position:absolute;left:30%;top:24%;width:14%;height:14%;border-radius:50%;
+    background:rgba(255,255,255,.75);filter:blur(.5px);
+  }
+  .cam .flash{
+    position:absolute;right:13%;top:16%;width:11%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,#FFF6E0 0%,#C9B98A 45%,#6E6448 100%);
+    box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.4),0 0 4px rgba(255,240,200,.25);
+  }
+  .cam .mic{
+    position:absolute;right:16.5%;bottom:18%;width:4.5%;aspect-ratio:1;border-radius:50%;
+    background:#05070C;box-shadow:inset 0 .5px 1px rgba(255,255,255,.2);
   }
   .engraving{
-    position:absolute;left:0;right:0;bottom:1.6%;text-align:center;
+    position:absolute;left:0;right:0;bottom:1.8%;text-align:center;z-index:4;pointer-events:none;
     font-family:var(--display);font-weight:600;font-size:clamp(9px,1.1vw,12px);
-    letter-spacing:.28em;color:rgba(255,255,255,.28);text-transform:lowercase;
+    letter-spacing:.28em;color:rgba(210,220,255,.30);text-transform:lowercase;
   }
-  /* spots on the phone */
+  /* star white variant */
+  .phone.white{
+    background:
+      radial-gradient(120% 90% at 78% 8%,rgba(255,255,255,.7),transparent 46%),
+      linear-gradient(158deg,#FBFBFD 0%,#E9EBF1 45%,#D7DAE3 78%,#F0F1F6 100%);
+    box-shadow:
+      inset 0 1.5px 1px rgba(255,255,255,.9),
+      inset 0 -2px 2px rgba(90,95,115,.35),
+      inset 2px 0 3px rgba(255,255,255,.5),
+      inset -2px 0 3px rgba(90,95,115,.22),
+      0 30px 70px -20px rgba(50,55,75,.35),
+      0 8px 24px -12px rgba(50,55,75,.3);
+  }
+  .phone.white .sparkle{opacity:.25}
+  .phone.white .hinge{background:linear-gradient(180deg,transparent,rgba(90,95,115,.3) 16%,rgba(90,95,115,.3) 84%,transparent)}
+  .phone.white .engraving{color:rgba(70,76,95,.4)}
+  .phone.white .cam{background:radial-gradient(120% 120% at 30% 20%,rgba(255,255,255,.5),transparent 50%),linear-gradient(150deg,#E4E6EE,#C6C9D6 70%);box-shadow:inset 0 1.5px 1px rgba(255,255,255,.9),inset 0 -3px 8px rgba(90,95,115,.35),0 3px 8px rgba(90,95,115,.3)}
+  .phone.white .spot{border-color:rgba(30,36,60,.4);background:rgba(30,36,60,.05)}
+  .phone.white .spot .sid{color:rgba(20,25,45,.8)}
+  .phone.white .spot .sp{color:rgba(20,25,45,.5)}
+  .phone.white .sheen{background:radial-gradient(320px 420px at var(--sx,75%) var(--sy,12%),rgba(255,255,255,.5),transparent 65%)}
+  .color-row{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:2px}
+  .color-label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+  .color-dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);padding:0;transition:transform .12s ease,border-color .12s ease}
+  .color-dot:hover{transform:scale(1.1)}
+  .color-dot.night{background:linear-gradient(150deg,#232838,#0F1220)}
+  .color-dot.star{background:linear-gradient(150deg,#FBFBFD,#D7DAE3)}
+  .color-dot.on{border-color:var(--accent)}
+
+  /* spots */
   .spot{
-    position:absolute;border-radius:8px;border:1.5px dashed rgba(255,255,255,.4);
-    background:rgba(255,255,255,.045);
+    position:absolute;border-radius:8px;border:1.5px dashed rgba(215,225,255,.42);
+    background:rgba(215,225,255,.05);z-index:1;
     display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
     padding:5px 7px;text-align:left;color:#fff;
     transition:border-color .15s ease,background .15s ease,transform .15s ease;
   }
   .spot:hover,.spot.hl{border-color:var(--accent);background:rgba(245,99,0,.16);transform:scale(1.02);z-index:2}
-  .spot .sid{font-family:var(--mono);font-size:clamp(8px,.9vw,10.5px);font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.85)}
-  .spot .sp{font-family:var(--mono);font-size:clamp(8px,.9vw,10px);color:rgba(255,255,255,.55)}
-  .spot.taken{border-style:solid;border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.1)}
-  .spot.taken .sp{color:var(--accent);}
+  .spot .sid{font-family:var(--mono);font-size:clamp(8px,.9vw,10.5px);font-weight:600;letter-spacing:.06em;color:rgba(235,240,255,.85);pointer-events:none}
+  .spot .sp{font-family:var(--mono);font-size:clamp(8px,.9vw,10px);color:rgba(235,240,255,.5);pointer-events:none}
+  .spot.taken{border-style:solid;border-color:rgba(235,240,255,.22);background:rgba(235,240,255,.1)}
+  .spot.taken .sp{color:var(--accent)}
+  @keyframes spotPulse{0%,100%{border-color:rgba(245,99,0,.9)}50%{border-color:rgba(245,99,0,.35)}}
+  .phone-stage.dragging .spot{border-color:var(--accent);background:rgba(245,99,0,.07);animation:spotPulse 1.1s ease infinite}
+  .phone-stage.dragging .spot.target{background:rgba(245,99,0,.28);animation:none;border-style:solid;transform:scale(1.03)}
+
+  /* stickers */
+  #stickerLayer{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit}
+  .sticker{
+    position:absolute;pointer-events:auto;touch-action:none;cursor:grab;
+    transform:rotate(var(--rot,0deg));
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.5)) drop-shadow(0 0 1px rgba(0,0,0,.3));
+    animation:stickOn .22s cubic-bezier(.2,1.6,.4,1) both;
+  }
+  @keyframes stickOn{from{transform:rotate(var(--rot,0deg)) scale(1.35)}to{transform:rotate(var(--rot,0deg)) scale(1)}}
+  .sticker:active{cursor:grabbing}
+  .sticker svg,.sticker img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+  .sticker.custom img{background:#fff;padding:5%;border-radius:14%;border:2px solid #fff}
+  .sticker .st-x{
+    position:absolute;top:-9px;right:-9px;width:20px;height:20px;border-radius:50%;
+    border:none;background:var(--ink);color:#fff;font-size:13px;line-height:1;
+    display:grid;place-items:center;opacity:0;transition:opacity .12s ease;
+  }
+  .sticker:hover .st-x,.sticker:focus-within .st-x{opacity:1}
+  .drag-ghost{
+    position:fixed;z-index:99;pointer-events:none;transform:translate(-50%,-50%) rotate(-3deg) scale(1.06);
+    filter:drop-shadow(0 10px 18px rgba(15,18,32,.4));
+  }
+  .drag-ghost svg,.drag-ghost img{display:block;width:100%;height:auto}
+  .drag-ghost.custom img{background:#fff;padding:5%;border-radius:14%;border:2px solid #fff}
+
   /* dimension callouts */
   .dim{position:absolute;font-family:var(--mono);font-size:11px;color:var(--steel);letter-spacing:.04em}
-  .dim.w{left:0;right:0;bottom:-30px;text-align:center}
+  .dim.w{left:0;right:0;bottom:-28px;text-align:center}
   .dim.w::before{content:"";position:absolute;left:0;right:0;top:-8px;border-top:1px solid var(--line)}
   .dim.h{top:0;bottom:0;right:-26px;writing-mode:vertical-rl;text-align:center}
   .dim.h::before{content:"";position:absolute;top:0;bottom:0;left:-8px;border-left:1px solid var(--line)}
-  .phone-wrap{container-type:inline-size;position:relative;margin-right:26px;margin-bottom:34px}
+
+  /* snap CTA + tray */
+  .snap-cta{
+    display:none;align-items:center;justify-content:space-between;gap:12px;
+    margin:0 6px 14px;padding:10px 10px 10px 16px;border-radius:999px;
+    background:var(--ink);color:#fff;font-size:14px;font-weight:500;
+  }
+  .snap-cta.show{display:flex;animation:rise .3s ease both}
+  .snap-cta .btn{padding:8px 16px;font-size:13.5px}
+  .tray{margin:0 6px}
+  .tray-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .tray-title{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+  .upload-btn{
+    font-size:12.5px;font-weight:600;color:var(--accent-ink);background:none;border:none;
+    text-decoration:underline;text-underline-offset:3px;padding:0;cursor:pointer;white-space:nowrap;
+  }
+  .tray-row{
+    display:flex;gap:12px;align-items:center;overflow-x:auto;padding:12px;
+    background:var(--panel);border:1.5px dashed var(--line);border-radius:14px;
+  }
+  .tray-sticker{
+    flex:0 0 auto;border:none;background:none;padding:2px;touch-action:none;cursor:grab;
+    filter:drop-shadow(0 2px 3px rgba(15,18,32,.25));transition:transform .12s ease;
+  }
+  .tray-sticker:hover{transform:translateY(-3px) rotate(-2deg)}
+  .tray-sticker svg,.tray-sticker img{display:block;height:38px;width:auto;pointer-events:none}
+  .tray-sticker.custom img{height:38px;background:#fff;padding:3px;border-radius:6px;border:1.5px solid #fff}
+  .tray-hint{margin:8px 6px 0;font-size:12.5px;color:var(--steel)}
+
+  /* toast */
+  #toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);z-index:100;
+    background:var(--ink);color:#fff;font-size:14px;padding:11px 20px;border-radius:999px;
+    opacity:0;transition:transform .25s ease,opacity .25s ease;pointer-events:none;max-width:90vw;text-align:center;
+  }
+  #toast.show{transform:translate(-50%,0);opacity:1}
 
   /* inventory */
   .tier{margin-bottom:26px}
@@ -193,7 +341,6 @@
   }
   .bid-btn:hover{background:var(--ink);color:#fff}
   .spot-row.taken .bid-btn{border-color:var(--line);color:var(--steel)}
-  .spot-row.taken .bid-btn:hover{background:var(--panel);color:var(--ink)}
   .spot-row .sponsor{font-size:13px;color:var(--ok);font-weight:600}
   .spot-row:hover{background:#ECEEF1}
 
@@ -248,10 +395,7 @@
   .modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
   .modal-head h3{font-family:var(--display);font-weight:800;font-size:23px;letter-spacing:-.02em}
   .modal-close{background:none;border:none;font-size:22px;line-height:1;color:var(--steel);padding:4px}
-  .modal-spec{
-    margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
-    font-family:var(--mono);
-  }
+  .modal-spec{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-family:var(--mono)}
   .modal-spec div{background:var(--ground);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
   .modal-spec .k{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
   .modal-spec .v{font-size:14.5px;font-weight:600;margin-top:3px}
@@ -298,15 +442,16 @@
   </header>
 
   <section class="hero">
-    <span class="eyebrow">iPhone duo · revealed 09.09.26 · pre-orders 10.16.26</span>
+    <span class="eyebrow">iPhone duo · revealed 09.09.26 · pre-orders 10.16 · ships 10.23</span>
     <h1>Your sticker, on the back of the <span class="hl">first foldable iPhone</span>.</h1>
     <p class="lede">
       I'm Fazir. On October 16 I'm pre-ordering the iPhone duo the minute the store opens —
-      and the back panel is for sale. Eleven sticker spots, three sizes, highest bid wins each one.
-      If every spot sells at its starting bid, the phone pays for itself. Your brand rides along everywhere it goes.
+      and the night-sky back panel is for sale. Eleven sticker spots, three sizes, highest bid wins each one.
+      The duo starts at $1,999; if every spot sells at its starting bid, the phone's paid for with change left over.
+      Drag a sample sticker onto the phone below and see how your brand looks on it.
     </p>
     <div class="hero-ctas">
-      <a class="btn accent" href="#board">Claim a spot</a>
+      <a class="btn accent" href="#board">Try a sticker on it</a>
       <a class="btn ghost" href="#how">How it works</a>
     </div>
 
@@ -315,7 +460,7 @@
         <div class="stat-label">Phone fund</div>
         <div class="fund-row">
           <span class="fund-now mono" id="fundNow">$0</span>
-          <span class="fund-goal">goal $2,499 — the iPhone duo, day one</span>
+          <span class="fund-goal">goal $1,999 — the iPhone duo, day one</span>
         </div>
         <div class="fund-bar"><i id="fundBar" style="width:0%"></i></div>
         <div class="fund-foot" id="fundFoot">11 of 11 spots open · starting bids total $2,500</div>
@@ -328,29 +473,54 @@
           <div class="count-cell"><div class="n" id="cm">--</div><div class="u">min</div></div>
           <div class="count-cell"><div class="n" id="cs">--</div><div class="u">sec</div></div>
         </div>
-        <div class="count-foot">Oct 16, 2026 · 5:00 AM PT — winners invoiced same day</div>
+        <div class="count-foot">Oct 16, 2026 · 5:00 AM PT — stickers go on when it ships Oct 23</div>
       </div>
     </div>
   </section>
 
   <section class="board" id="board">
     <div class="section-head">
-      <h2>The back panel, to scale.</h2>
-      <p>72 × 152 mm of anodized titanium. The camera keeps its corner — everything else is inventory.
-         Pick a spot, place a bid. Bigger spot, bigger price.</p>
+      <h2>Try it on the back panel — to scale.</h2>
+      <p>65 × 132 mm of night-sky titanium, closed. The camera keeps its corner — everything else is inventory.
+         Drag a sample sticker onto the phone (or upload your own logo), see where it lands, then bid on the spot you want.</p>
     </div>
     <div class="board-grid">
       <div class="phone-col">
-        <div class="phone-stage">
+        <div class="phone-stage" id="stage">
           <div class="phone-wrap">
             <div class="phone" id="phone">
-              <div class="cam" aria-hidden="true"><div class="lenses"><div class="lens"></div><div class="lens"></div></div></div>
+              <span class="sparkle" aria-hidden="true"></span>
+              <div class="hinge" aria-hidden="true"></div>
+              <div class="cam" aria-hidden="true">
+                <div class="lenses"><div class="lens"></div><div class="lens"></div></div>
+                <div class="flash"></div><div class="mic"></div>
+              </div>
               <div class="engraving" aria-hidden="true">iphone duo</div>
+              <div id="stickerLayer"></div>
+              <span class="sheen" aria-hidden="true"></span>
               <!-- spots injected here -->
             </div>
-            <div class="dim h" aria-hidden="true">152 mm</div>
-            <div class="dim w" aria-hidden="true">72 mm</div>
+            <div class="dim h" aria-hidden="true">132 mm</div>
+            <div class="dim w" aria-hidden="true">65 mm</div>
           </div>
+        </div>
+        <div class="snap-cta" id="snapCta">
+          <span id="snapText">Looks good on M-03</span>
+          <button class="btn accent" id="snapBid">Bid $250</button>
+        </div>
+        <div class="color-row">
+          <span class="color-label">Finish</span>
+          <button class="color-dot night on" id="dotNight" aria-label="Night sky finish" title="Night sky"></button>
+          <button class="color-dot star" id="dotStar" aria-label="Star white finish" title="Star white"></button>
+        </div>
+        <div class="tray" style="margin-top:16px">
+          <div class="tray-head">
+            <span class="tray-title">Sample stickers — drag one on</span>
+            <button class="upload-btn" id="uploadBtn">+ upload your logo</button>
+            <input type="file" id="uploadInput" accept="image/*" hidden>
+          </div>
+          <div class="tray-row" id="tray"></div>
+          <p class="tray-hint">Drop a sticker on a dashed spot to size it to that space. Drag it off the phone to remove it. Samples are mock brands — yours goes on for real when you win a bid.</p>
         </div>
       </div>
       <div class="inventory" id="inventory">
@@ -359,7 +529,7 @@
     </div>
   </section>
 
-  <section class="how" id="how">
+  <section class="how reveal" id="how">
     <div class="section-head">
       <h2>How it works</h2>
     </div>
@@ -367,7 +537,7 @@
       <div class="step">
         <div class="k">STEP 01</div>
         <h3>Pick your spot</h3>
-        <p>Eleven spots in three sizes — from a 20 × 14 mm badge to a 63 × 24 mm banner across the middle of the panel. Every spot shows its live high bid.</p>
+        <p>Eleven spots in three sizes — from an 18 × 12 mm badge to a 57 × 21 mm banner across the middle of the panel. Every spot shows its live high bid, and you can preview any sticker on it above.</p>
       </div>
       <div class="step">
         <div class="k">STEP 02</div>
@@ -377,7 +547,7 @@
       <div class="step">
         <div class="k">STEP 03</div>
         <h3>Win the panel</h3>
-        <p>Bidding closes when pre-orders open on 10.16. Winners get invoiced, stickers get printed, and the moment the duo arrives your logo is on it.</p>
+        <p>Bidding closes when pre-orders open on 10.16. Winners get invoiced, stickers get printed, and when the duo ships on 10.23 your logo is on it from day one.</p>
       </div>
     </div>
     <div class="gets">
@@ -392,7 +562,7 @@
     </div>
   </section>
 
-  <section class="rules">
+  <section class="rules reveal">
     <div class="section-head">
       <h2>The rules</h2>
     </div>
@@ -418,13 +588,13 @@
     </div>
   </section>
 
-  <section class="faq" id="faq">
+  <section class="faq reveal" id="faq">
     <div class="section-head">
       <h2>FAQ</h2>
     </div>
     <details>
       <summary>Is this serious?</summary>
-      <div class="a">Completely. The iPhone duo costs $2,499 and I want the internet to pay for it, one sticker at a time. Marc Lou funded his HYROX race selling ad space on his body — this is the same idea, on the most-photographed gadget of 2026.</div>
+      <div class="a">Completely. The iPhone duo starts at $1,999 and I want the internet to pay for it, one sticker at a time. Marc Lou funded his HYROX race selling ad space on his body — this is the same idea, on the most-photographed gadget of 2026.</div>
     </details>
     <details>
       <summary>How many people will actually see my sticker?</summary>
@@ -439,8 +609,8 @@
       <div class="a">Yes. Adjacent spots can even be merged into one bigger sticker — bid on each spot separately and mention the merge in your note.</div>
     </details>
     <details>
-      <summary>What if the phone doesn't arrive on launch day?</summary>
-      <div class="a">Pre-orders ship in launch order — I'll be ordering at 5:00 AM PT sharp. If Apple slips the date, stickers go on whenever the phone lands, and the 12-month clock starts that day. You're never invoiced until the panel is real and in my hands.</div>
+      <summary>What if the phone doesn't arrive on time?</summary>
+      <div class="a">The duo ships October 23 and I'll be in the first pre-order wave. If Apple slips the date, stickers go on whenever the phone lands, and the 12-month clock starts that day. You're never invoiced until the panel is real and in my hands.</div>
     </details>
   </section>
 
@@ -451,6 +621,8 @@
   </footer>
 
 </div>
+
+<div id="toast" role="status"></div>
 
 <!-- bid modal -->
 <dialog id="bidModal">
@@ -506,13 +678,18 @@ const CONFIG = {
   // sends you an activation email; click it once and you're live.
   email: "fazirjameerali@gmail.com",
 
-  goal: 2499,                              // price of the iPhone duo
+  goal: 1999,                              // iPhone duo, 256 GB
   closes: "2026-10-16T12:00:00Z",          // pre-orders open: Oct 16, 5:00 AM PT
   minIncrease: 1.25,                       // outbids must be 25% above current
 
+  // Optional: path/URL to a real photo of the duo's back panel, cropped
+  // tight to the panel edges (e.g. "assets/duo-back.jpg"). When set, it
+  // replaces the CSS render and spots/stickers overlay the photo.
+  phoneImage: null,
+
   // Spots. To record a bid: set `bid` to the amount.
   // When a spot is WON & PAID: set sponsor {name, url} — it renders on the phone.
-  // x/y/w/h are % of the panel; mm sizes derive from the 72×152 mm panel.
+  // x/y/w/h are % of the panel; mm sizes derive from the 65×132 mm panel.
   spots: [
     {id:"M-01", tier:"M", start:250, bid:null, sponsor:null, x:52, y:3,  w:42,   h:16},
     {id:"L-01", tier:"L", start:500, bid:null, sponsor:null, x:6,  y:22, w:88,   h:16},
@@ -529,7 +706,9 @@ const CONFIG = {
 };
 /* ================== end of config ========================== */
 
-const PANEL_W = 72, PANEL_H = 152; // mm
+const PANEL_W = 65, PANEL_H = 132;             // mm, iPhone duo closed
+const EL_ASPECT = PANEL_W / PANEL_H;           // phone element width/height
+const CAM = {x:5, y:2, w:42, h:18};            // no-sticker zone (%)
 const TIERS = {
   L:{name:"Large",  chip:"",  blurb:"the billboard"},
   M:{name:"Medium", chip:"m", blurb:"the prime cut"},
@@ -539,9 +718,18 @@ const $ = s => document.querySelector(s);
 const fmt = n => "$" + n.toLocaleString("en-US");
 const mm = s => `${Math.round(s.w/100*PANEL_W)} × ${Math.round(s.h/100*PANEL_H)} mm`;
 const minBid = s => s.bid ? Math.ceil(s.bid * CONFIG.minIncrease) : s.start;
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const phone = $("#phone"), stage = $("#stage"), layer = $("#stickerLayer");
+
+if (CONFIG.phoneImage){
+  phone.style.background = `url("${CONFIG.phoneImage}") center/cover no-repeat`;
+  phone.querySelector(".cam").style.display = "none";
+  phone.querySelector(".engraving").style.display = "none";
+  phone.querySelector(".hinge").style.display = "none";
+  phone.querySelector(".sparkle").style.display = "none";
+}
 
 /* --- render spots on the phone --- */
-const phone = $("#phone");
 CONFIG.spots.forEach(s => {
   const b = document.createElement("button");
   b.className = "spot" + (s.sponsor ? " taken" : "");
@@ -626,6 +814,242 @@ function openBid(id){
 }
 $("#mClose").addEventListener("click", () => modal.close());
 modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
+
+/* ============================================================
+   STICKER PLAYGROUND
+   ============================================================ */
+const AR = "Archivo,Arial,sans-serif";
+const SAMPLES = [
+  {id:"nova", aspect:3, defW:34, svg:
+    `<svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg"><rect x="1.5" y="1.5" width="117" height="37" rx="10" fill="#fff"/><rect x="5" y="5" width="110" height="30" rx="7" fill="#4F46E5"/><text x="58" y="26" text-anchor="middle" font-family="${AR}" font-size="16" font-weight="800" fill="#fff" letter-spacing="2.5">NOVA</text><circle cx="103" cy="20" r="4.5" fill="#FDE047"/></svg>`},
+  {id:"brew", aspect:1, defW:19, svg:
+    `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="38.5" fill="#fff"/><circle cx="40" cy="40" r="33.5" fill="#5C3A21"/><text x="40" y="34" text-anchor="middle" font-family="${AR}" font-size="11.5" font-weight="700" fill="#F3E5D3">brew&amp;co</text><path d="M28 44h20v6a8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8z" fill="#F3E5D3"/><path d="M48 45h4a4 4 0 0 1 0 8h-4v-3h4a1 1 0 0 0 0-2h-4z" fill="#F3E5D3"/><path d="M33 36c0-2 2-2 2-4M39 36c0-2 2-2 2-4" stroke="#F3E5D3" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`},
+  {id:"bolt", aspect:1, defW:17, svg:
+    `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="76" height="76" rx="18" fill="#fff"/><rect x="6.5" y="6.5" width="67" height="67" rx="14" fill="#FACC15"/><path d="M45 13 22 45h13l-7 23 29-38H42l7-17z" fill="#111418"/></svg>`},
+  {id:"aurora", aspect:3.4, defW:36, svg:
+    `<svg viewBox="0 0 136 40" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset=".55" stop-color="#D946EF"/><stop offset="1" stop-color="#FB923C"/></linearGradient></defs><rect x="1.5" y="1.5" width="133" height="37" rx="18.5" fill="#fff"/><rect x="5" y="5" width="126" height="30" rx="15" fill="url(#ag)"/><text x="68" y="25.5" text-anchor="middle" font-family="${AR}" font-size="14" font-weight="700" fill="#fff" letter-spacing="1">aurora·ai</text></svg>`},
+  {id:"pixl", aspect:1, defW:17, svg:
+    `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="76" height="76" rx="14" fill="#fff"/><rect x="6.5" y="6.5" width="67" height="67" rx="10" fill="#16A34A"/><g fill="#fff"><rect x="22" y="24" width="10" height="10"/><rect x="48" y="24" width="10" height="10"/><rect x="18" y="46" width="8" height="8"/><rect x="26" y="52" width="8" height="8"/><rect x="34" y="54" width="12" height="8"/><rect x="46" y="52" width="8" height="8"/><rect x="54" y="46" width="8" height="8"/></g></svg>`},
+  {id:"star", aspect:1, defW:20, svg:
+    `<svg viewBox="0 0 84 84" xmlns="http://www.w3.org/2000/svg"><path d="M42 2 53.5 30l30 2.5-23 19.5 7 29.5L42 65.5 16.5 81.5l7-29.5-23-19.5 30-2.5z" fill="#fff"/><path d="M42 9.5 51.5 33l25 2-19 16.2 5.8 24.4L42 62.3 20.7 75.6l5.8-24.4-19-16.2 25-2z" fill="#FB7185"/><circle cx="35" cy="42" r="3" fill="#111418"/><circle cx="49" cy="42" r="3" fill="#111418"/><path d="M34 51q8 7 16 0" stroke="#111418" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`},
+];
+
+const tray = $("#tray");
+let placed = [], uid = 0, dragCtx = null;
+
+SAMPLES.forEach(d => addTraySticker(d));
+function addTraySticker(d){
+  const b = document.createElement("button");
+  b.className = "tray-sticker" + (d.custom ? " custom" : "");
+  b.setAttribute("aria-label", `Sample sticker ${d.id} — drag onto the phone`);
+  b.innerHTML = d.svg;
+  b.addEventListener("pointerdown", e => beginDrag(e, d, null));
+  tray.appendChild(b);
+  return b;
+}
+
+function beginDrag(e, data, placedSt){
+  if (e.button !== undefined && e.button !== 0) return;
+  if (dragCtx) return;
+  e.preventDefault();
+  stage.classList.add("dragging");
+  const pr = phone.getBoundingClientRect();
+  const wPct = placedSt ? placedSt.w : data.defW;
+  const ghost = document.createElement("div");
+  ghost.className = "drag-ghost" + (data.custom ? " custom" : "");
+  ghost.innerHTML = data.svg;
+  ghost.style.width = (pr.width * wPct / 100) + "px";
+  document.body.appendChild(ghost);
+  dragCtx = {data, ghost, placedSt, wPct, startX:e.clientX, startY:e.clientY, moved:false};
+  if (placedSt) placedSt.el.style.opacity = .25;
+  hideSnapCta();
+  moveGhost(e);
+  window.addEventListener("pointermove", moveGhost);
+  window.addEventListener("pointerup", endDrag, {once:true});
+}
+function moveGhost(e){
+  const g = dragCtx.ghost;
+  g.style.left = e.clientX + "px";
+  g.style.top = e.clientY + "px";
+  if (Math.abs(e.clientX - dragCtx.startX) + Math.abs(e.clientY - dragCtx.startY) > 6) dragCtx.moved = true;
+  const s = spotAtPoint(e.clientX, e.clientY);
+  document.querySelectorAll(".spot.target").forEach(el => el.classList.remove("target"));
+  if (s && s.id) document.querySelector(`.spot[data-spot="${s.id}"]`)?.classList.add("target");
+}
+function spotAtPoint(px, py){
+  const pr = phone.getBoundingClientRect();
+  const x = (px - pr.left) / pr.width * 100, y = (py - pr.top) / pr.height * 100;
+  if (x < 0 || x > 100 || y < 0 || y > 100) return null;
+  const spot = CONFIG.spots.find(s => x >= s.x && x <= s.x + s.w && y >= s.y && y <= s.y + s.h);
+  return spot ? {...spot, px:x, py:y} : {free:true, px:x, py:y};
+}
+function endDrag(e){
+  window.removeEventListener("pointermove", moveGhost);
+  document.querySelectorAll(".spot.target").forEach(el => el.classList.remove("target"));
+  const ctx = dragCtx; dragCtx = null;
+  ctx.ghost.remove();
+  const hit = spotAtPoint(e.clientX, e.clientY);
+  stage.classList.remove("dragging");
+
+  // tap on an already-placed sticker → leave it where it is
+  if (!ctx.moved && ctx.placedSt){ restore(ctx.placedSt); return; }
+  // tap (no real drag) from the tray → auto-place on the biggest open spot
+  if (!ctx.moved){
+    const target = CONFIG.spots.filter(s => !placed.some(p => p.spotId === s.id))
+      .sort((a,b) => b.w*b.h - a.w*a.h)[0] || CONFIG.spots[1];
+    placeSticker(ctx.data, null, null, ctx.wPct, target, ctx.placedSt);
+    return;
+  }
+  if (!hit){
+    if (ctx.placedSt){ removeSticker(ctx.placedSt); toast("Sticker removed"); }
+    return;
+  }
+  placeSticker(ctx.data, hit.px, hit.py, ctx.wPct, hit.free ? null : hit, ctx.placedSt);
+}
+
+function placeSticker(data, px, py, wPct, spot, existing){
+  let x, y, w = wPct, spotId = null;
+  const a = data.aspect;
+  if (spot){
+    // fit inside the spot, centered
+    w = Math.min(spot.w * .94, spot.h * .94 * a / EL_ASPECT);
+    const h = w / a * EL_ASPECT;
+    x = spot.x + (spot.w - w) / 2;
+    y = spot.y + (spot.h - h) / 2;
+    spotId = spot.id;
+  } else {
+    const h = w / a * EL_ASPECT;
+    x = clamp(px - w/2, 1, 99 - w);
+    y = clamp(py - h/2, 1, 99 - h);
+    // keep off the camera plateau
+    if (x < CAM.x + CAM.w && x + w > CAM.x && y < CAM.y + CAM.h && y + h > CAM.y){
+      if (CAM.y + CAM.h + h <= 99) y = CAM.y + CAM.h + 1;
+      else if (CAM.x + CAM.w + w <= 99) x = CAM.x + CAM.w + 1;
+      else { toast("The camera keeps its corner — try lower on the panel."); if (existing) restore(existing); return; }
+      toast("Nudged off the camera — that corner's not for sale.");
+    }
+  }
+  const st = existing || {uid:++uid, data, el:null, rot:0};
+  st.x = x; st.y = y; st.w = w; st.spotId = spotId;
+  st.rot = spotId ? (Math.random()*3 - 1.5) : (Math.random()*10 - 5);
+  renderSticker(st);
+  if (!existing) placed.push(st);
+  if (spotId) showSnapCta(spotId);
+}
+function restore(st){ st.el.style.opacity = 1; }
+function renderSticker(st){
+  let el = st.el;
+  if (!el){
+    el = document.createElement("div");
+    el.className = "sticker" + (st.data.custom ? " custom" : "");
+    el.innerHTML = st.data.svg + `<button class="st-x" aria-label="Remove sticker">×</button>`;
+    el.addEventListener("pointerdown", ev => {
+      if (ev.target.closest(".st-x")) return;
+      beginDrag(ev, st.data, st);
+    });
+    el.querySelector(".st-x").addEventListener("click", () => { removeSticker(st); });
+    layer.appendChild(el);
+    st.el = el;
+  }
+  el.style.opacity = 1;
+  el.style.left = st.x + "%";
+  el.style.top = st.y + "%";
+  el.style.width = st.w + "%";
+  el.style.setProperty("--rot", st.rot.toFixed(1) + "deg");
+  el.style.animation = "none"; void el.offsetWidth; el.style.animation = "";
+}
+function removeSticker(st){
+  st.el.remove();
+  placed = placed.filter(p => p !== st);
+  hideSnapCta();
+}
+
+/* snap CTA */
+let snapTimer = null;
+function showSnapCta(spotId){
+  const s = CONFIG.spots.find(x => x.id === spotId);
+  $("#snapText").textContent = `Looks good on ${s.id} · ${mm(s)}`;
+  $("#snapBid").textContent = `Bid ${fmt(minBid(s))}`;
+  $("#snapBid").onclick = () => openBid(s.id);
+  $("#snapCta").classList.add("show");
+  clearTimeout(snapTimer);
+  snapTimer = setTimeout(hideSnapCta, 9000);
+}
+function hideSnapCta(){ $("#snapCta").classList.remove("show"); clearTimeout(snapTimer); }
+
+/* toast */
+let toastTimer = null;
+function toast(msg){
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+/* upload your own logo */
+$("#uploadBtn").addEventListener("click", () => $("#uploadInput").click());
+$("#uploadInput").addEventListener("change", e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const d = {
+        id: "custom" + Date.now(),
+        aspect: img.naturalWidth / img.naturalHeight || 1,
+        defW: 26, custom: true,
+        svg: `<img src="${reader.result}" alt="Your logo">`,
+      };
+      const btn = addTraySticker(d);
+      btn.scrollIntoView({behavior:"smooth", block:"nearest", inline:"end"});
+      toast("Logo added to the tray — drag it onto the phone.");
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+  e.target.value = "";
+});
+
+/* preplaced samples so the panel isn't empty */
+placeSticker(SAMPLES[0], null, null, SAMPLES[0].defW, CONFIG.spots.find(s => s.id === "M-03"), null);
+placeSticker(SAMPLES[5], null, null, SAMPLES[5].defW, CONFIG.spots.find(s => s.id === "S-02"), null);
+hideSnapCta();
+
+/* ============================================================
+   TILT + SHEEN + FINISH TOGGLE + REVEALS
+   ============================================================ */
+const motionOK = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (motionOK){
+  stage.addEventListener("pointermove", e => {
+    if (dragCtx) return;
+    const r = phone.getBoundingClientRect();
+    const nx = (e.clientX - r.left) / r.width - .5;
+    const ny = (e.clientY - r.top) / r.height - .5;
+    phone.style.setProperty("--ry", (nx * 16).toFixed(2) + "deg");
+    phone.style.setProperty("--rx", (-ny * 10).toFixed(2) + "deg");
+    phone.style.setProperty("--sx", ((nx + .5) * 100).toFixed(1) + "%");
+    phone.style.setProperty("--sy", ((ny + .5) * 100).toFixed(1) + "%");
+  });
+  stage.addEventListener("pointerleave", () => {
+    phone.style.setProperty("--ry", "0deg");
+    phone.style.setProperty("--rx", "0deg");
+  });
+}
+
+$("#dotNight").addEventListener("click", () => setFinish(false));
+$("#dotStar").addEventListener("click", () => setFinish(true));
+function setFinish(white){
+  phone.classList.toggle("white", white);
+  $("#dotNight").classList.toggle("on", !white);
+  $("#dotStar").classList.toggle("on", white);
+}
+
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+}), {threshold:.12});
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 </script>
 </body>
 </html>

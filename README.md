@@ -1,12 +1,30 @@
 # Sponsor My Duo
 
-Sell sticker spots on the back of the new iPhone duo. Companies bid for space —
-the bigger the spot, the higher the price. If every spot sells at its starting
-bid, the phone pays for itself.
+Sell sticker spots on the back of the new iPhone Duo ($1,999, pre-orders
+Oct 16, ships Oct 23). Companies bid for space — the bigger the spot, the
+higher the price. If every spot sells at its starting bid, the phone pays
+for itself.
 
 Inspired by [Marc Lou's Sponsor My Body](https://hyrox.marclou.com).
 
 The whole site is one file: **`index.html`**. No build step, no dependencies.
+
+## The sticker playground
+
+Visitors can drag sample stickers (or upload their own logo — it never
+leaves their browser) onto an interactive, to-scale render of the Duo's
+back panel:
+
+- The phone tilts in 3D with the cursor, with a moving light sheen, in both
+  real finishes (night sky / star white, toggle under the phone).
+- Dropping a sticker on a dashed spot sizes it to that space and pops a
+  "Bid on M-03" call-to-action; dropping elsewhere places it free-form.
+- Stickers can't cover the camera plateau, and dragging one off the phone
+  removes it.
+- Want the real press photo instead of the CSS render? Save it cropped to
+  the panel edges (e.g. `assets/duo-back.jpg`) and set
+  `CONFIG.phoneImage: "assets/duo-back.jpg"` — spots and stickers overlay
+  the photo. Mind the license on Apple newsroom images before publishing.
 
 ## How bids reach you
 
@@ -29,7 +47,7 @@ Everything lives in the `CONFIG` object at the bottom of `index.html`:
   The sponsor's name renders on the phone.
 - **Change dates, goal, or minimum outbid %** — `closes`, `goal`, `minIncrease`.
 - **Move/resize spots** — each spot has `x/y/w/h` as percentages of the
-  72 × 152 mm panel; the mm labels recompute automatically.
+  65 × 132 mm panel; the mm labels recompute automatically.
 
 ## Deploying
 
