@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sponsor My Duo</title>
+<meta name="description" content="Bid for a sticker spot on the back of the new iPhone duo. Bigger spot, bigger price. Help pay for the phone — your brand rides along everywhere it goes.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='18' y='4' width='64' height='92' rx='14' fill='%231B1E24'/><rect x='26' y='34' width='48' height='20' rx='4' fill='none' stroke='%23F56300' stroke-width='5' stroke-dasharray='8 6'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F2F3F5;
+    --panel:#FAFBFC;
+    --ink:#111418;
+    --steel:#6E7683;
+    --line:#D9DCE0;
+    --accent:#F56300;
+    --accent-ink:#C24E00;
+    --phone-a:#1B1E24;
+    --phone-b:#2B303A;
+    --ok:#2E7D4F;
+    --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.55;
+    padding-inline:clamp(16px,4vw,48px);
+  }
+  .wrap{max-width:1120px;margin:0 auto}
+  a{color:inherit}
+  button{font:inherit;cursor:pointer}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+  /* ---------- top bar ---------- */
+  header.top{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding-block:18px;
+  }
+  .wordmark{
+    font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.02em;
+    text-decoration:none;display:flex;align-items:center;gap:10px;
+  }
+  .wordmark .dot{width:10px;height:10px;border-radius:3px;background:var(--accent);display:inline-block}
+  nav.top-links{display:flex;align-items:center;gap:22px;font-size:14.5px;font-weight:500}
+  nav.top-links a{text-decoration:none;color:var(--steel)}
+  nav.top-links a:hover{color:var(--ink)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--ink);color:#fff;border:none;border-radius:999px;
+    padding:11px 22px;font-weight:600;font-size:15px;text-decoration:none;
+    transition:transform .12s ease,background .12s ease;
+  }
+  .btn:hover{background:#000;transform:translateY(-1px)}
+  .btn.accent{background:var(--accent)}
+  .btn.accent:hover{background:#E05500}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn.ghost:hover{background:#fff;transform:translateY(-1px)}
+
+  /* ---------- hero ---------- */
+  .hero{padding-block:clamp(40px,7vw,84px) clamp(36px,5vw,64px)}
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent-ink);
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--accent)}
+  h1{
+    font-family:var(--display);font-weight:800;letter-spacing:-.035em;line-height:1.02;
+    font-size:clamp(38px,6.4vw,74px);max-width:18ch;text-wrap:balance;
+  }
+  h1 .hl{color:var(--accent)}
+  .hero p.lede{
+    margin-top:22px;max-width:56ch;font-size:clamp(16px,1.6vw,19px);color:#3A4048;
+  }
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+  .hero-stats{
+    margin-top:44px;display:grid;grid-template-columns:1.4fr 1fr;gap:16px;
+  }
+  .stat-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;
+  }
+  .stat-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--steel)}
+  .fund-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:10px}
+  .fund-now{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:-.02em}
+  .fund-goal{font-family:var(--mono);font-size:13.5px;color:var(--steel)}
+  .fund-bar{margin-top:12px;height:8px;border-radius:99px;background:#E4E7EB;overflow:hidden}
+  .fund-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#FF8A3D);border-radius:99px;min-width:6px;transition:width .6s ease}
+  .fund-foot{margin-top:10px;font-size:13.5px;color:var(--steel)}
+  .count-grid{display:flex;gap:14px;margin-top:12px}
+  .count-cell .n{font-family:var(--mono);font-weight:600;font-size:28px;letter-spacing:-.01em}
+  .count-cell .u{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+  .count-foot{margin-top:10px;font-size:13.5px;color:var(--steel)}
+
+  /* ---------- board: phone + inventory ---------- */
+  .board{padding-block:clamp(30px,4vw,56px)}
+  .section-head{margin-bottom:clamp(22px,3vw,36px);max-width:60ch}
+  h2{
+    font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.06;
+    font-size:clamp(27px,3.6vw,42px);text-wrap:balance;
+  }
+  .section-head p{margin-top:12px;color:#3A4048;font-size:16.5px}
+  .board-grid{display:grid;grid-template-columns:minmax(300px,430px) 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+  .phone-col{position:sticky;top:24px}
+
+  /* the phone */
+  .phone-stage{padding:10px 6px 2px}
+  .phone{
+    position:relative;width:100%;aspect-ratio:72/152;
+    border-radius:12.5% / 5.9%;
+    background:linear-gradient(155deg,var(--phone-b) 0%,var(--phone-a) 55%,#14171C 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.14),
+      inset 0 -2px 6px rgba(0,0,0,.5),
+      0 24px 60px -18px rgba(17,20,24,.45);
+  }
+  .phone::before{ /* hinge highlight on the fold edge */
+    content:"";position:absolute;inset:1.2% auto 1.2% 2.4%;width:1.5px;
+    background:linear-gradient(180deg,transparent,rgba(255,255,255,.16) 20%,rgba(255,255,255,.16) 80%,transparent);
+  }
+  .cam{
+    position:absolute;left:6%;top:3%;width:40%;height:16%;
+    border-radius:22%/26%;
+    background:linear-gradient(150deg,#30353F,#1A1D23);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -3px 8px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.35);
+    display:grid;place-items:center;
+  }
+  .cam .lenses{display:grid;grid-template-rows:1fr 1fr;gap:14%;height:72%;aspect-ratio:1/2.1}
+  .cam .lens{
+    width:100%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 34% 30%,#3C4250 0%,#151820 55%,#05070A 100%);
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.07),inset 0 2px 5px rgba(0,0,0,.7);
+  }
+  .engraving{
+    position:absolute;left:0;right:0;bottom:1.6%;text-align:center;
+    font-family:var(--display);font-weight:600;font-size:clamp(9px,1.1vw,12px);
+    letter-spacing:.28em;color:rgba(255,255,255,.28);text-transform:lowercase;
+  }
+  /* spots on the phone */
+  .spot{
+    position:absolute;border-radius:8px;border:1.5px dashed rgba(255,255,255,.4);
+    background:rgba(255,255,255,.045);
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
+    padding:5px 7px;text-align:left;color:#fff;
+    transition:border-color .15s ease,background .15s ease,transform .15s ease;
+  }
+  .spot:hover,.spot.hl{border-color:var(--accent);background:rgba(245,99,0,.16);transform:scale(1.02);z-index:2}
+  .spot .sid{font-family:var(--mono);font-size:clamp(8px,.9vw,10.5px);font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.85)}
+  .spot .sp{font-family:var(--mono);font-size:clamp(8px,.9vw,10px);color:rgba(255,255,255,.55)}
+  .spot.taken{border-style:solid;border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.1)}
+  .spot.taken .sp{color:var(--accent);}
+  /* dimension callouts */
+  .dim{position:absolute;font-family:var(--mono);font-size:11px;color:var(--steel);letter-spacing:.04em}
+  .dim.w{left:0;right:0;bottom:-30px;text-align:center}
+  .dim.w::before{content:"";position:absolute;left:0;right:0;top:-8px;border-top:1px solid var(--line)}
+  .dim.h{top:0;bottom:0;right:-26px;writing-mode:vertical-rl;text-align:center}
+  .dim.h::before{content:"";position:absolute;top:0;bottom:0;left:-8px;border-left:1px solid var(--line)}
+  .phone-wrap{container-type:inline-size;position:relative;margin-right:26px;margin-bottom:34px}
+
+  /* inventory */
+  .tier{margin-bottom:26px}
+  .tier-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1.5px solid var(--ink)}
+  .tier-name{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  .tier-chip{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;padding:3px 9px;border-radius:99px;background:var(--ink);color:#fff}
+  .tier-chip.m{background:#3A4048}.tier-chip.s{background:#6E7683}
+  .tier-meta{font-family:var(--mono);font-size:12px;color:var(--steel)}
+  .spot-row{
+    display:grid;grid-template-columns:64px 1fr auto auto;align-items:center;gap:14px;
+    padding:13px 4px;border-bottom:1px solid var(--line);
+  }
+  .spot-row .rid{font-family:var(--mono);font-weight:600;font-size:13.5px}
+  .spot-row .rdim{font-family:var(--mono);font-size:12.5px;color:var(--steel)}
+  .spot-row .rprice{font-family:var(--mono);font-size:14px;font-weight:600;text-align:right}
+  .spot-row .rprice small{display:block;font-weight:400;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--steel)}
+  .bid-btn{
+    border:1.5px solid var(--ink);background:transparent;color:var(--ink);
+    border-radius:999px;padding:7px 16px;font-weight:600;font-size:13.5px;
+    transition:background .12s ease,color .12s ease;
+  }
+  .bid-btn:hover{background:var(--ink);color:#fff}
+  .spot-row.taken .bid-btn{border-color:var(--line);color:var(--steel)}
+  .spot-row.taken .bid-btn:hover{background:var(--panel);color:var(--ink)}
+  .spot-row .sponsor{font-size:13px;color:var(--ok);font-weight:600}
+  .spot-row:hover{background:#ECEEF1}
+
+  /* ---------- how it works ---------- */
+  .how{padding-block:clamp(40px,6vw,80px)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+  .step .k{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--accent-ink)}
+  .step h3{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em;margin-top:10px}
+  .step p{margin-top:8px;font-size:14.5px;color:#3A4048}
+  .gets{margin-top:22px;background:var(--ink);color:#fff;border-radius:16px;padding:26px clamp(20px,3vw,34px);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+  .gets .gtitle{font-family:var(--display);font-weight:700;font-size:18px;white-space:nowrap}
+  .gets ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14.5px;color:#C9CED6}
+  .gets li::before{content:"—";color:var(--accent);margin-right:8px}
+
+  /* ---------- rules ---------- */
+  .rules{padding-block:clamp(10px,2vw,20px) clamp(40px,6vw,72px)}
+  .rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  .rule-card{border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--panel)}
+  .rule-card h3{font-family:var(--display);font-weight:700;font-size:17px}
+  .rule-card p,.rule-card li{font-size:14.5px;color:#3A4048;margin-top:8px}
+  .rule-card ul{padding-left:18px}
+
+  /* ---------- faq ---------- */
+  .faq{padding-block:0 clamp(48px,7vw,88px)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{
+    list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:18px 4px;font-family:var(--display);font-weight:600;font-size:16.5px;cursor:pointer;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--mono);font-size:20px;color:var(--steel);transition:transform .15s ease}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq .a{padding:0 4px 20px;max-width:64ch;color:#3A4048;font-size:15px}
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1.5px solid var(--ink);padding-block:26px 44px;
+    display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between;
+    font-size:14px;color:var(--steel);
+  }
+  footer a{color:var(--ink);font-weight:500}
+
+  /* ---------- modal ---------- */
+  dialog{
+    border:none;border-radius:20px;padding:0;max-width:480px;width:calc(100vw - 32px);
+    background:var(--panel);color:var(--ink);
+    box-shadow:0 32px 80px -20px rgba(17,20,24,.5);
+  }
+  dialog::backdrop{background:rgba(17,20,24,.55);backdrop-filter:blur(3px)}
+  .modal-in{padding:28px clamp(20px,4vw,32px) 30px}
+  .modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+  .modal-head h3{font-family:var(--display);font-weight:800;font-size:23px;letter-spacing:-.02em}
+  .modal-close{background:none;border:none;font-size:22px;line-height:1;color:var(--steel);padding:4px}
+  .modal-spec{
+    margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+    font-family:var(--mono);
+  }
+  .modal-spec div{background:var(--ground);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .modal-spec .k{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+  .modal-spec .v{font-size:14.5px;font-weight:600;margin-top:3px}
+  form.bid-form{margin-top:18px;display:grid;gap:12px}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+  .field input,.field textarea{
+    width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;
+    font:inherit;font-size:15px;background:#fff;color:var(--ink);
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+  .field .hint{font-size:12px;color:var(--steel);margin-top:4px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .form-note{font-size:12.5px;color:var(--steel)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:960px){
+    .board-grid{grid-template-columns:1fr}
+    .phone-col{position:static;max-width:400px;margin:0 auto 12px}
+    .steps{grid-template-columns:1fr}
+    .rules-grid{grid-template-columns:1fr}
+    .gets{grid-template-columns:1fr;gap:12px}
+    .hero-stats{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    nav.top-links a.link{display:none}
+    .spot-row{grid-template-columns:52px 1fr auto;row-gap:4px}
+    .spot-row .rdim{grid-column:1/3}
+    .two{grid-template-columns:1fr}
+    .modal-spec{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="wordmark" href="#"><span class="dot"></span>sponsor my duo</a>
+    <nav class="top-links">
+      <a class="link" href="#board">The spots</a>
+      <a class="link" href="#how">How it works</a>
+      <a class="link" href="#faq">FAQ</a>
+      <a class="btn accent" href="#board">Claim a spot</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">iPhone duo · revealed 09.09.26 · pre-orders 10.16.26</span>
+    <h1>Your sticker, on the back of the <span class="hl">first foldable iPhone</span>.</h1>
+    <p class="lede">
+      I'm Fazir. On October 16 I'm pre-ordering the iPhone duo the minute the store opens —
+      and the back panel is for sale. Eleven sticker spots, three sizes, highest bid wins each one.
+      If every spot sells at its starting bid, the phone pays for itself. Your brand rides along everywhere it goes.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn accent" href="#board">Claim a spot</a>
+      <a class="btn ghost" href="#how">How it works</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-label">Phone fund</div>
+        <div class="fund-row">
+          <span class="fund-now mono" id="fundNow">$0</span>
+          <span class="fund-goal">goal $2,499 — the iPhone duo, day one</span>
+        </div>
+        <div class="fund-bar"><i id="fundBar" style="width:0%"></i></div>
+        <div class="fund-foot" id="fundFoot">11 of 11 spots open · starting bids total $2,500</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Bidding closes when pre-orders open</div>
+        <div class="count-grid" id="countdown">
+          <div class="count-cell"><div class="n" id="cd">--</div><div class="u">days</div></div>
+          <div class="count-cell"><div class="n" id="ch">--</div><div class="u">hrs</div></div>
+          <div class="count-cell"><div class="n" id="cm">--</div><div class="u">min</div></div>
+          <div class="count-cell"><div class="n" id="cs">--</div><div class="u">sec</div></div>
+        </div>
+        <div class="count-foot">Oct 16, 2026 · 5:00 AM PT — winners invoiced same day</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="board" id="board">
+    <div class="section-head">
+      <h2>The back panel, to scale.</h2>
+      <p>72 × 152 mm of anodized titanium. The camera keeps its corner — everything else is inventory.
+         Pick a spot, place a bid. Bigger spot, bigger price.</p>
+    </div>
+    <div class="board-grid">
+      <div class="phone-col">
+        <div class="phone-stage">
+          <div class="phone-wrap">
+            <div class="phone" id="phone">
+              <div class="cam" aria-hidden="true"><div class="lenses"><div class="lens"></div><div class="lens"></div></div></div>
+              <div class="engraving" aria-hidden="true">iphone duo</div>
+              <!-- spots injected here -->
+            </div>
+            <div class="dim h" aria-hidden="true">152 mm</div>
+            <div class="dim w" aria-hidden="true">72 mm</div>
+          </div>
+        </div>
+      </div>
+      <div class="inventory" id="inventory">
+        <!-- tiers injected here -->
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="section-head">
+      <h2>How it works</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="k">STEP 01</div>
+        <h3>Pick your spot</h3>
+        <p>Eleven spots in three sizes — from a 20 × 14 mm badge to a 63 × 24 mm banner across the middle of the panel. Every spot shows its live high bid.</p>
+      </div>
+      <div class="step">
+        <div class="k">STEP 02</div>
+        <h3>Place your bid</h3>
+        <p>Send your bid through the form — company, logo, and amount. To take a spot that has a bid on it, beat it by at least 25%. You pay nothing until you win.</p>
+      </div>
+      <div class="step">
+        <div class="k">STEP 03</div>
+        <h3>Win the panel</h3>
+        <p>Bidding closes when pre-orders open on 10.16. Winners get invoiced, stickers get printed, and the moment the duo arrives your logo is on it.</p>
+      </div>
+    </div>
+    <div class="gets">
+      <div class="gtitle">Every sponsor gets</div>
+      <ul>
+        <li>Your sticker professionally printed &amp; applied</li>
+        <li>Photo + video proof on delivery day</li>
+        <li>Name, logo &amp; link listed on this site</li>
+        <li>A shoutout when the phone is unboxed</li>
+        <li>12 months on the panel, minimum</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="rules">
+    <div class="section-head">
+      <h2>The rules</h2>
+    </div>
+    <div class="rules-grid">
+      <div class="rule-card">
+        <h3>Bidding</h3>
+        <ul>
+          <li>Starting bids: Large $500 · Medium $250 · Small $100.</li>
+          <li>Outbid an existing bid by 25% or more to take the spot.</li>
+          <li>Highest bid per spot when pre-orders open on Oct 16 wins.</li>
+          <li>No payment up front — winners are invoiced on close.</li>
+        </ul>
+      </div>
+      <div class="rule-card">
+        <h3>Stickers</h3>
+        <ul>
+          <li>Your logo or mark, printed on premium cut vinyl at exact spot size.</li>
+          <li>Family-friendly brands only — I reserve the right to decline a bid.</li>
+          <li>Stays on the panel for at least 12 months or until the next iPhone.</li>
+          <li>The camera and the fold hinge are not for sale. Everything else is.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="section-head">
+      <h2>FAQ</h2>
+    </div>
+    <details>
+      <summary>Is this serious?</summary>
+      <div class="a">Completely. The iPhone duo costs $2,499 and I want the internet to pay for it, one sticker at a time. Marc Lou funded his HYROX race selling ad space on his body — this is the same idea, on the most-photographed gadget of 2026.</div>
+    </details>
+    <details>
+      <summary>How many people will actually see my sticker?</summary>
+      <div class="a">The phone comes with me everywhere — cafés, coworking spaces, meetups, flights. Every unboxing photo, every video, and this site itself carry your logo with a link. Foldable iPhones get noticed; people ask to see them. Your sticker is part of that conversation.</div>
+    </details>
+    <details>
+      <summary>What happens if I get outbid?</summary>
+      <div class="a">Nothing to undo — you only pay if you win. I'll email you that you've been outbid, and you can raise your bid on the same spot (or grab a different one) any time before pre-orders open on Oct 16.</div>
+    </details>
+    <details>
+      <summary>Can I buy multiple spots?</summary>
+      <div class="a">Yes. Adjacent spots can even be merged into one bigger sticker — bid on each spot separately and mention the merge in your note.</div>
+    </details>
+    <details>
+      <summary>What if the phone doesn't arrive on launch day?</summary>
+      <div class="a">Pre-orders ship in launch order — I'll be ordering at 5:00 AM PT sharp. If Apple slips the date, stickers go on whenever the phone lands, and the 12-month clock starts that day. You're never invoiced until the panel is real and in my hands.</div>
+    </details>
+  </section>
+
+  <footer>
+    <div>Built by <strong>Fazir</strong> · <a href="https://x.com/yourhandle">@yourhandle</a></div>
+    <div>Bids &amp; questions: <a id="mailLink" href="#">email me</a></div>
+    <div>Inspired by <a href="https://hyrox.marclou.com" rel="noopener">Marc Lou's Sponsor My Body</a></div>
+  </footer>
+
+</div>
+
+<!-- bid modal -->
+<dialog id="bidModal">
+  <div class="modal-in">
+    <div class="modal-head">
+      <h3 id="mTitle">Bid on spot</h3>
+      <button class="modal-close" id="mClose" aria-label="Close">×</button>
+    </div>
+    <div class="modal-spec">
+      <div><div class="k">Spot</div><div class="v" id="mSpot">—</div></div>
+      <div><div class="k">Size</div><div class="v" id="mSize">—</div></div>
+      <div><div class="k">Min bid</div><div class="v" id="mMin">—</div></div>
+    </div>
+    <form class="bid-form" id="bidForm" method="POST" action="#">
+      <input type="hidden" name="_subject" id="fSubject" value="New bid — Sponsor My Duo">
+      <input type="hidden" name="spot" id="fSpot" value="">
+      <input type="hidden" name="_template" value="table">
+      <div class="two">
+        <div class="field">
+          <label for="fCompany">Company / brand</label>
+          <input id="fCompany" name="company" required placeholder="Acme Inc.">
+        </div>
+        <div class="field">
+          <label for="fBid">Your bid (USD)</label>
+          <input id="fBid" name="bid_usd" type="number" min="0" step="1" required placeholder="250">
+        </div>
+      </div>
+      <div class="field">
+        <label for="fSite">Website</label>
+        <input id="fSite" name="website" type="url" required placeholder="https://acme.com">
+      </div>
+      <div class="field">
+        <label for="fEmail">Work email</label>
+        <input id="fEmail" name="email" type="email" required placeholder="you@acme.com">
+        <div class="hint">Bid confirmations and outbid alerts go here.</div>
+      </div>
+      <div class="field">
+        <label for="fNote">Note <span style="font-weight:400;color:var(--steel)">(optional)</span></label>
+        <textarea id="fNote" name="note" rows="2" placeholder="Link to your logo, sticker ideas, merge requests…"></textarea>
+      </div>
+      <button class="btn accent" type="submit" style="width:100%">Place bid</button>
+      <p class="form-note">No charge now — you're invoiced only if your bid wins when bidding closes on Oct 16.</p>
+    </form>
+  </div>
+</dialog>
+
+<script>
+/* ============================================================
+   CONFIG — everything you'll ever need to edit lives here.
+   ============================================================ */
+const CONFIG = {
+  // Where bid emails go. Powered by formsubmit.co — the FIRST submission
+  // sends you an activation email; click it once and you're live.
+  email: "fazirjameerali@gmail.com",
+
+  goal: 2499,                              // price of the iPhone duo
+  closes: "2026-10-16T12:00:00Z",          // pre-orders open: Oct 16, 5:00 AM PT
+  minIncrease: 1.25,                       // outbids must be 25% above current
+
+  // Spots. To record a bid: set `bid` to the amount.
+  // When a spot is WON & PAID: set sponsor {name, url} — it renders on the phone.
+  // x/y/w/h are % of the panel; mm sizes derive from the 72×152 mm panel.
+  spots: [
+    {id:"M-01", tier:"M", start:250, bid:null, sponsor:null, x:52, y:3,  w:42,   h:16},
+    {id:"L-01", tier:"L", start:500, bid:null, sponsor:null, x:6,  y:22, w:88,   h:16},
+    {id:"M-02", tier:"M", start:250, bid:null, sponsor:null, x:6,  y:41, w:43,   h:12},
+    {id:"M-03", tier:"M", start:250, bid:null, sponsor:null, x:51, y:41, w:43,   h:12},
+    {id:"S-01", tier:"S", start:100, bid:null, sponsor:null, x:6,  y:56, w:28,   h:9},
+    {id:"S-02", tier:"S", start:100, bid:null, sponsor:null, x:36, y:56, w:28,   h:9},
+    {id:"S-03", tier:"S", start:100, bid:null, sponsor:null, x:66, y:56, w:28,   h:9},
+    {id:"L-02", tier:"L", start:500, bid:null, sponsor:null, x:6,  y:68, w:88,   h:14},
+    {id:"M-04", tier:"M", start:250, bid:null, sponsor:null, x:6,  y:85, w:43,   h:10},
+    {id:"S-04", tier:"S", start:100, bid:null, sponsor:null, x:51, y:85, w:20.5, h:10},
+    {id:"S-05", tier:"S", start:100, bid:null, sponsor:null, x:73.5,y:85,w:20.5, h:10},
+  ],
+};
+/* ================== end of config ========================== */
+
+const PANEL_W = 72, PANEL_H = 152; // mm
+const TIERS = {
+  L:{name:"Large",  chip:"",  blurb:"the billboard"},
+  M:{name:"Medium", chip:"m", blurb:"the prime cut"},
+  S:{name:"Small",  chip:"s", blurb:"the badge"},
+};
+const $ = s => document.querySelector(s);
+const fmt = n => "$" + n.toLocaleString("en-US");
+const mm = s => `${Math.round(s.w/100*PANEL_W)} × ${Math.round(s.h/100*PANEL_H)} mm`;
+const minBid = s => s.bid ? Math.ceil(s.bid * CONFIG.minIncrease) : s.start;
+
+/* --- render spots on the phone --- */
+const phone = $("#phone");
+CONFIG.spots.forEach(s => {
+  const b = document.createElement("button");
+  b.className = "spot" + (s.sponsor ? " taken" : "");
+  b.style.cssText = `left:${s.x}%;top:${s.y}%;width:${s.w}%;height:${s.h}%`;
+  b.dataset.spot = s.id;
+  b.setAttribute("aria-label", `Spot ${s.id}, ${mm(s)}, ${s.sponsor ? "taken by " + s.sponsor.name : "current bid " + fmt(s.bid || s.start)}`);
+  b.innerHTML = s.sponsor
+    ? `<span class="sid">${s.sponsor.name}</span><span class="sp">${fmt(s.bid || s.start)}</span>`
+    : `<span class="sid">${s.id}</span><span class="sp">${fmt(s.bid || s.start)}${s.bid ? "" : " start"}</span>`;
+  b.addEventListener("click", () => openBid(s.id));
+  b.addEventListener("mouseenter", () => hlRow(s.id, true));
+  b.addEventListener("mouseleave", () => hlRow(s.id, false));
+  phone.appendChild(b);
+});
+
+/* --- render inventory list --- */
+const inv = $("#inventory");
+["L","M","S"].forEach(t => {
+  const spots = CONFIG.spots.filter(s => s.tier === t);
+  const tier = document.createElement("div");
+  tier.className = "tier";
+  tier.innerHTML = `
+    <div class="tier-head">
+      <span class="tier-name"><span class="tier-chip ${TIERS[t].chip}">${t}</span>${TIERS[t].name} — ${TIERS[t].blurb}</span>
+      <span class="tier-meta">${spots.length} spots · from ${fmt(spots[0].start)}</span>
+    </div>`;
+  spots.forEach(s => {
+    const row = document.createElement("div");
+    row.className = "spot-row" + (s.sponsor ? " taken" : "");
+    row.dataset.spot = s.id;
+    row.innerHTML = `
+      <span class="rid">${s.id}</span>
+      <span class="rdim">${mm(s)}${s.sponsor ? ` · <span class="sponsor">${s.sponsor.name}</span>` : ""}</span>
+      <span class="rprice">${fmt(s.bid || s.start)}<small>${s.bid ? "high bid" : "starting"}</small></span>
+      <button class="bid-btn">${s.bid || s.sponsor ? "Outbid" : "Bid"}</button>`;
+    row.querySelector(".bid-btn").addEventListener("click", () => openBid(s.id));
+    row.addEventListener("mouseenter", () => hlSpot(s.id, true));
+    row.addEventListener("mouseleave", () => hlSpot(s.id, false));
+    tier.appendChild(row);
+  });
+  inv.appendChild(tier);
+});
+
+function hlRow(id, on){ document.querySelectorAll(`.spot-row[data-spot="${id}"]`).forEach(r => r.style.background = on ? "#ECEEF1" : ""); }
+function hlSpot(id, on){ document.querySelectorAll(`.spot[data-spot="${id}"]`).forEach(s => s.classList.toggle("hl", on)); }
+
+/* --- funding stats --- */
+const pledged = CONFIG.spots.reduce((a,s) => a + (s.bid || 0), 0);
+const open = CONFIG.spots.filter(s => !s.sponsor).length;
+const startTotal = CONFIG.spots.reduce((a,s) => a + s.start, 0);
+$("#fundNow").textContent = fmt(pledged);
+$("#fundBar").style.width = Math.min(100, pledged / CONFIG.goal * 100) + "%";
+$("#fundFoot").textContent = `${open} of ${CONFIG.spots.length} spots open · starting bids total ${fmt(startTotal)}`;
+
+/* --- countdown --- */
+const closes = new Date(CONFIG.closes);
+function tick(){
+  let d = Math.max(0, closes - Date.now()) / 1000;
+  $("#cd").textContent = String(Math.floor(d / 86400)).padStart(2,"0");
+  $("#ch").textContent = String(Math.floor(d % 86400 / 3600)).padStart(2,"0");
+  $("#cm").textContent = String(Math.floor(d % 3600 / 60)).padStart(2,"0");
+  $("#cs").textContent = String(Math.floor(d % 60)).padStart(2,"0");
+}
+tick(); setInterval(tick, 1000);
+
+/* --- bid modal --- */
+const modal = $("#bidModal"), form = $("#bidForm");
+form.action = "https://formsubmit.co/" + CONFIG.email;
+$("#mailLink").href = "mailto:" + CONFIG.email;
+function openBid(id){
+  const s = CONFIG.spots.find(x => x.id === id);
+  $("#mTitle").textContent = s.sponsor ? `Outbid ${s.sponsor.name}` : `Bid on spot ${s.id}`;
+  $("#mSpot").textContent = `${s.id} · ${TIERS[s.tier].name}`;
+  $("#mSize").textContent = mm(s);
+  $("#mMin").textContent = fmt(minBid(s));
+  $("#fSpot").value = `${s.id} (${TIERS[s.tier].name}, ${mm(s)})`;
+  $("#fSubject").value = `New bid on ${s.id} — Sponsor My Duo`;
+  const bid = $("#fBid");
+  bid.min = minBid(s);
+  bid.placeholder = minBid(s);
+  modal.showModal();
+}
+$("#mClose").addEventListener("click", () => modal.close());
+modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
+</script>
+</body>
+</html>
