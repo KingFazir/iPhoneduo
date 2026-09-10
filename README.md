@@ -47,7 +47,8 @@ Everything lives in the `CONFIG` object at the bottom of `index.html`:
   The sponsor's name renders on the phone.
 - **Change dates, goal, or minimum outbid %** — `closes`, `goal`, `minIncrease`.
 - **Move/resize spots** — each spot has `x/y/w/h` as percentages of the
-  65 × 132 mm panel; the mm labels recompute automatically.
+  84 × 118 mm panel (84.1 × 117.8 mm closed, per Apple's specs); the mm
+  labels recompute automatically.
 
 ## Deploying
 
