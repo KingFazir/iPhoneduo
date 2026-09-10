@@ -26,13 +26,18 @@ back panel:
 
 ## How bids reach you
 
-The bid form posts to [FormSubmit](https://formsubmit.co) using the email set
-in `CONFIG.email` (bottom of `index.html`).
+Bids are submitted in-page (no redirect) to the email in `CONFIG.email`
+(bottom of `index.html`), through one of two free services:
 
-> **One-time activation:** the first time anyone submits the form, FormSubmit
-> emails you an activation link. Click it once and every bid after that lands
-> straight in your inbox. Submit a test bid yourself after deploying to trigger
-> the activation.
+- **Web3Forms (recommended)** — get a free access key at
+  [web3forms.com](https://web3forms.com) (enter your email, the key arrives
+  by mail, no account needed) and paste it into `CONFIG.web3formsKey`.
+- **FormSubmit (fallback when no key is set)** — requires clicking a
+  one-time activation email after the first submission, and the service
+  has occasional outages.
+
+If the delivery service is unreachable when someone bids, their email app
+opens with the bid pre-filled and addressed to you — no bid is lost.
 
 ## Managing the auction
 
