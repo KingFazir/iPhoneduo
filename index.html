@@ -688,6 +688,12 @@ const CONFIG = {
   // with the bid pre-filled, so no bid is ever lost.
   web3formsKey: "516e5f6e-6e55-4180-9c40-efb38cc59950",
 
+  // Analytics (optional): your GoatCounter code — free at goatcounter.com,
+  // no cookies, no banner needed. If your dashboard is
+  // https://sponsormyduo.goatcounter.com, put "sponsormyduo" here.
+  // Leave empty to disable analytics entirely.
+  goatcounter: "",
+
   goal: 1999,                              // iPhone duo, 256 GB
   closes: "2026-10-16T12:00:00Z",          // pre-orders open: Oct 16, 5:00 AM PT
   minIncrease: 1.25,                       // outbids must be 25% above current
@@ -841,6 +847,7 @@ form.addEventListener("submit", async e => {
     modal.close();
     form.reset();
     toast("Bid sent! I'll email you if you're outbid — or when you win.");
+    window.goatcounter?.count?.({path: "bid:" + (data.spot || "unknown"), title: "Bid placed", event: true});
   } catch (err) {
     const body = encodeURIComponent(
       `Spot: ${data.spot}\nCompany: ${data.company}\nBid (USD): ${data.bid_usd}\nWebsite: ${data.website}\nContact: ${data.email}\nNote: ${data.note || "-"}`);
@@ -1107,6 +1114,15 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 if (new URLSearchParams(location.search).has("sent")){
   toast("Bid sent! I'll email you if you're outbid — or when you win.");
   history.replaceState(null, "", location.pathname);
+}
+
+/* analytics (cookieless, only if configured) */
+if (CONFIG.goatcounter){
+  const gc = document.createElement("script");
+  gc.async = true;
+  gc.src = "https://gc.zgo.at/count.js";
+  gc.dataset.goatcounter = `https://${CONFIG.goatcounter}.goatcounter.com/count`;
+  document.head.appendChild(gc);
 }
 </script>
 </body>
