@@ -64,14 +64,20 @@ Import the repo at [vercel.com/new](https://vercel.com/new) or
 [app.netlify.com](https://app.netlify.com) — no build command, output directory
 is the repo root. Done.
 
-## Custom domain
+## Custom domain: sponsormyiphoneduo.com
 
-1. Buy the domain at any registrar (Namecheap, Cloudflare, Porkbun —
-   e.g. `sponsormyduo.com`).
-2. **GitHub Pages:** Settings → Pages → Custom domain → enter it, then at your
-   registrar add a `CNAME` record pointing `www` → `kingfazir.github.io`, and
-   `A` records for the apex to GitHub Pages IPs (`185.199.108.153`,
-   `.109.`, `.110.`, `.111.153`). Enable *Enforce HTTPS*.
-   **Vercel/Netlify:** add the domain in the project's Domains settings and
-   follow the two DNS records they show you.
-3. HTTPS certificates are automatic on all three hosts.
+The repo's `CNAME` file already declares the domain. To finish:
+
+1. At the domain registrar, add these DNS records:
+
+   | Type  | Name | Value                  |
+   |-------|------|------------------------|
+   | A     | @    | `185.199.108.153`      |
+   | A     | @    | `185.199.109.153`      |
+   | A     | @    | `185.199.110.153`      |
+   | A     | @    | `185.199.111.153`      |
+   | CNAME | www  | `kingfazir.github.io`  |
+
+2. Repo → Settings → Pages → Custom domain → enter
+   `sponsormyiphoneduo.com` → Save, then tick **Enforce HTTPS** once the
+   DNS check passes (can take a few minutes to a couple of hours).

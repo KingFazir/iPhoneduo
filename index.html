@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sponsor my iPhone Duo</title>
 <meta name="description" content="Bid for a sticker spot on the back of the new iPhone duo. Drag a sample sticker onto the phone, pick your spot, place your bid — bigger space, bigger price.">
+<link rel="canonical" href="https://sponsormyiphoneduo.com/">
+<meta property="og:title" content="Sponsor my iPhone Duo">
+<meta property="og:description" content="Bid for a sticker spot on the back of the new iPhone Duo — bigger space, bigger price. Bidding closes when pre-orders open Oct 16.">
+<meta property="og:url" content="https://sponsormyiphoneduo.com/">
+<meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='18' y='4' width='64' height='92' rx='14' fill='%23151827'/><rect x='26' y='34' width='48' height='20' rx='4' fill='none' stroke='%23F56300' stroke-width='5' stroke-dasharray='8 6'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -635,6 +640,7 @@
     </div>
     <form class="bid-form" id="bidForm" method="POST" action="#">
       <input type="hidden" name="_subject" id="fSubject" value="New bid — Sponsor my iPhone Duo">
+      <input type="hidden" name="_next" id="fNext" value="">
       <input type="hidden" name="spot" id="fSpot" value="">
       <input type="hidden" name="_template" value="table">
       <div class="two">
@@ -794,6 +800,7 @@ tick(); setInterval(tick, 1000);
 /* --- bid modal --- */
 const modal = $("#bidModal"), form = $("#bidForm");
 form.action = "https://formsubmit.co/" + CONFIG.email;
+$("#fNext").value = location.origin + location.pathname + "?sent=1";
 $("#mailLink").href = "mailto:" + CONFIG.email;
 function openBid(id){
   const s = CONFIG.spots.find(x => x.id === id);
@@ -1046,6 +1053,12 @@ const io = new IntersectionObserver(es => es.forEach(en => {
   if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
 }), {threshold:.12});
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* back from a form submission */
+if (new URLSearchParams(location.search).has("sent")){
+  toast("Bid sent! I'll email you if you're outbid — or when you win.");
+  history.replaceState(null, "", location.pathname);
+}
 </script>
 </body>
 </html>
